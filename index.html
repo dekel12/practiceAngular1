@@ -1,0 +1,52 @@
+<html ng-app="todo">
+<body>
+<h1>TODO</h1>
+
+
+<div ng-view=""></div>
+<script src="bower_components/angular/angular.js"></script>
+<script src="bower_components/jquery/dist/jquery.js"></script>
+<script src="bower_components/angular-route/angular-route.js"></script>
+<script>
+    angular.module('todo',['ngRoute'])
+            .controller('contr',['$scope',function($scope){
+                function remove(arr, item) {
+                    for(var i = arr.length; i--;) {
+                        if(arr[i] === item) {
+                            arr.splice(i, 1);
+                        }
+                    }
+                }
+                $scope.todos = [];
+                $scope.add = function () {
+                    $scope.todos.push({
+                        name: $scope.name,
+                        desc: $scope.desc,
+                        editing: false
+                    })
+                    $scope.name = '';
+                    $scope.desc = '';
+                }
+                $scope.done = function(todo){
+                    remove($scope.todos, todo);
+                }
+
+
+            }])
+        .config(['$routeProvider', function($routeProvider) {
+        $routeProvider.
+        when('/', {
+            templateUrl: 'list.html',
+            controller: 'contr'
+        }).
+        when('/:todoId', {
+            templateUrl: 'todo.html',
+            controller: 'todoContr'
+        }).
+        otherwise({
+            redirectTo: '/'
+        });
+    }]);
+</script>
+</body>
+</html>

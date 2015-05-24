@@ -1,0 +1,12 @@
+name: <input ng-model="name">
+desc: <input ng-model="desc">
+<button ng-click="add()">add</button>
+<div>filter: <input ng-model="filterModel"></div>
+<div ng-repeat="todo in todos | filter:filterModel">
+<button ng-click="done(todo)">V</button>
+ You totally forgot to: <div ng-if="!todo.editing">{{todo.name}} {{todo.desc}}
+<button ng-click="todo.editing = true">edit</button></div>
+<div ng-if="todo.editing"><input ng-model="todo.name">
+<input ng-model="todo.desc"><button ng-click="todo.editing = false">done edit</button></div>
+<a href="#/{{$index}}">This todo's own page!</a>
+</div>

@@ -1,39 +1,7 @@
-<html ng-app="todo" ng-controller="contr">
-<h1>TODO</h1>
-<script src="bower_components/angular/angular.min.js"></script>
-<script src="bower_components/jquery/dist/jquery.js"></script>
-<script>
-    angular.module('todo',[])
-            .controller('contr',['$scope',function($scope){
-                function remove(arr, item) {
-                    for(var i = arr.length; i--;) {
-                        if(arr[i] === item) {
-                            arr.splice(i, 1);
-                        }
-                    }
-                }
-                $scope.todos = [];
-                $scope.add = function () {
-                    $scope.todos.push({
-                        name: $scope.name,
-                        desc: $scope.desc,
-                        editing: false
-                    })
-                    $scope.name = '';
-                    $scope.desc = '';
-                }
-                $scope.done = function(todo){
-                    remove($scope.todos, todo);
-                }
-                
-
-            }])
-</script>
-name: <input ng-model="name">
-desc: <input ng-model="desc">
-<button ng-click="add()">add</button>
-<div>filter: <input ng-model="filterModel"></div>
-<div ng-repeat="todo in todos | filter:filterModel">
-<button ng-click="done(todo)">V</button> You totally forgot to: <div ng-if="!todo.editing">{{todo.name}} {{todo.desc}}<button ng-click="todo.editing = true">edit</button></div> <div ng-if="todo.editing"><input ng-model="todo.name"> <input ng-model="todo.desc"><button ng-click="todo.editing = false">done edit</button></div>
+<div>
+    <a href="#/">Back</a>
 </div>
-</html>
+<div>
+    <h1>{{name}}</h1>
+</div>
+{{desc}}
