@@ -10,7 +10,8 @@
 <script>
 	todos = [];
     angular.module('todo',['ngRoute'])
-            .controller('contr',['$scope',function($scope){
+			.constant('todos', [])
+            .controller('contr',['$scope', 'todos',function($scope, todos){
                 function remove(arr, item) {
                     for(var i = arr.length; i--;) {
                         if(arr[i] === item) {
@@ -34,7 +35,7 @@
 
 
             }])
-			.controller('todoContr',['$scope', '$routeParams', function($scope, $routeParams){
+			.controller('todoContr',['$scope', '$routeParams', 'todos', function($scope, $routeParams, todos){
 				var todo = todos[$routeParams.todoId];
 				$scope.name = todo.name;
 				$scope.desc = todo.desc;
