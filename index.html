@@ -8,6 +8,7 @@
 <script src="bower_components/jquery/dist/jquery.js"></script>
 <script src="bower_components/angular-route/angular-route.js"></script>
 <script>
+	todos = [];
     angular.module('todo',['ngRoute'])
             .controller('contr',['$scope',function($scope){
                 function remove(arr, item) {
@@ -17,7 +18,7 @@
                         }
                     }
                 }
-                $scope.todos = [];
+                $scope.todos = todos;
                 $scope.add = function () {
                     $scope.todos.push({
                         name: $scope.name,
@@ -33,6 +34,11 @@
 
 
             }])
+			.controller('todoContr',['$scope', '$routeParams', function($scope, $routeParams){
+				var todo = todos[$routeParams.todoId];
+				$scope.name = todo.name;
+				$scope.desc = todo.desc;
+			}])
         .config(['$routeProvider', function($routeProvider) {
         $routeProvider.
         when('/', {
